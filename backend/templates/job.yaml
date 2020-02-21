@@ -1,0 +1,47 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: {{ include "backend.fullname" . }}
+  namespace: {{ .Values.namespace }}
+spec:
+  template:
+    spec:
+      imagePullSecrets:
+        - name: {{ .Values.imagePullSecrets }}-{{ .Release.Name }}
+      containers:
+      - name: {{ .Chart.Name }}
+        image: {{ .Values.image.name }}
+        command: ["python",  "./recipe_management/manage.py", "migrate"]
+        env:
+          - name: DB_HOST
+            valueFrom:
+              secretKeyRef:
+                name: {{ .Values.dbsecret.name }}-{{ .Release.Name}}
+                key: DB_HOST
+          - name: DB_USER
+            valueFrom:
+              secretKeyRef:
+                name: {{ .Values.dbsecret.name }}-{{ .Release.Name}}
+                key: DB_USER
+          - name: DB_USER
+            valueFrom:
+              secretKeyRef:
+                name: {{ .Values.dbsecret.name }}-{{ .Release.Name}}
+                key: DB_USER
+          - name: DB_PASS
+            valueFrom:
+              secretKeyRef:
+                name: {{ .Values.dbsecret.name }}-{{ .Release.Name}}
+                key: DB_PASS
+          - name: DB_PORT
+            valueFrom:
+              secretKeyRef:
+                name: {{ .Values.dbsecret.name }}-{{ .Release.Name}}
+                key: DB_PORT
+          - name: DB_NAME
+            valueFrom:
+              secretKeyRef:
+                name: {{ .Values.dbsecret.name }}-{{ .Release.Name}}
+                key: DB_NAME
+      restartPolicy: Never
+  backoffLimit: 4

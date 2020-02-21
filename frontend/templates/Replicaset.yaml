@@ -1,0 +1,49 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: {{ include "frontend.fullname" . }}
+  labels:
+    {{- include "frontend.labels" . | nindent 4 }}
+  namespace: {{ .Values.namespace }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "frontend.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "frontend.selectorLabels" . | nindent 8 }}
+    spec:
+      imagePullSecrets:
+        - name: {{ .Values.imagePullSecrets }}-{{ .Release.Name }}
+      containers:
+        - name: {{ .Chart.Name }}
+          image: {{ .Values.image.name}}
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - name: liveliness-port
+              containerPort: 2000
+              hostPort: 2000
+          livenessProbe:
+            httpGet:
+              path: /
+              port: liveliness-port
+            initialDelaySeconds: 80
+            periodSeconds: 3
+          readinessProbe:
+            tcpSocket:
+              port: 2000
+            initialDelaySeconds: 80
+            periodSeconds: 10
+      initContainers:
+        - name: init-backend
+          image: {{ .Values.initContainers.name }}
+          command:
+          - 'sh'
+          - '-c'
+          - >
+            until nslookup {{ .Values.service.bname }}.api;
+              do echo waiting for myservice;
+              sleep 2;
+            done;
