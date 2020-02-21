@@ -43,7 +43,7 @@ spec:
           - 'sh'
           - '-c'
           - >
-            until nslookup {{ .Values.service.bname }}.api;
+            until nslookup {{ .Values.backendServiceName }}.api;
               do echo waiting for myservice;
               sleep 2;
             done;

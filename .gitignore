@@ -1,1 +1,5 @@
 .idea
+backend/values.yaml
+frontend/values.yaml
+./backend/values.yaml
+./frontend/values.yaml

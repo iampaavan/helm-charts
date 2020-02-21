@@ -16,7 +16,7 @@ spec:
         {{- include "backend.selectorLabels" . | nindent 8 }}
     spec:
       imagePullSecrets:
-        - name: {{ .Values.imagePullSecrets }}-{{ .Release.Name }}
+        - name: {{ .Values.imagePullSecrets }}
       containers:
         - name: {{ .Chart.Name }}
           image: {{ .Values.image.name }}
@@ -46,7 +46,7 @@ spec:
               valueFrom:
                 secretKeyRef:
                   name: {{ .Values.dbsecret.name }}-{{ .Release.Name}}
-                  key: DB_HOST
+                  key: DB_USER
             - name: DB_PASS
               valueFrom:
                 secretKeyRef:
@@ -62,3 +62,21 @@ spec:
                 secretKeyRef:
                   name: {{ .Values.dbsecret.name }}-{{ .Release.Name}}
                   key: DB_NAME
+            - name: BUCKET_NAME
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.dbsecret.name }}-{{ .Release.Name}}
+                  key: BUCKET_NAME
+            - name: AWS_ACCESS_KEY_ID
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.dbsecret.name }}-{{ .Release.Name}}
+                  key: AWS_ACCESS_KEY_ID
+            - name: SECRET_ACCESS_KEY_ID
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.dbsecret.name }}-{{ .Release.Name}}
+                  key: SECRET_ACCESS_KEY_ID
+
+
+

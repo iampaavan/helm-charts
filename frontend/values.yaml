@@ -12,7 +12,7 @@ imagePullSecrets: regcred
 #fullnameOverride: ""
 service:
   name: ui-frontend
-  bname: api-backend-recipe1
+#  bname: api-backend-recipe1
   type: LoadBalancer
   port: 2000
   targetport: 2000
@@ -22,3 +22,5 @@ imageCredentials:
   password: Hh07101996
 initContainers:
   name: busybox:1.28
+
+backendServiceName: ""

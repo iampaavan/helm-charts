@@ -5,7 +5,7 @@
 replicaCount: 1
 namespace: api
 image:
-  name: hemalgadhiya/csye-7374-advanced-cloud-webapp-backend:95a7a906865ccc690a2ce906ebe784c8dea814be
+  name: hemalgadhiya/csye-7374-advanced-cloud-webapp-backend:b9b4b7355d3ec0d30e2a9b6e62fbe87cb3243044
   pullPolicy: IfNotPresent
 
 imagePullSecrets: dockercreds
@@ -25,3 +25,7 @@ imageCredentials:
   registry: https://index.docker.io/v1/
   username: hemalgadhiya
   password: Hh07101996
+
+bucketname: dev-hgadhiya-csye7374-image-upload
+awsAccessKey: AKIAUJWRCG77QYGIF35U
+awsSecretKey: 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
