@@ -1,0 +1,82 @@
+apiVersion: apps/v1
+kind: ReplicaSet
+metadata:
+  name: {{ include "backend.fullname" . }}
+  labels:
+    {{- include "backend.labels" . | nindent 4 }}
+  namespace: {{ .Values.namespace }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "backend.selectorLabels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "backend.selectorLabels" . | nindent 8 }}
+    spec:
+      imagePullSecrets:
+        - name: {{ .Values.imagePullSecrets }}
+      containers:
+        - name: {{ .Chart.Name }}
+          image: {{ .Values.image.name }}
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          ports:
+            - name: liveliness-port
+              containerPort: 8000
+              hostPort: 80
+          livenessProbe:
+            httpGet:
+              path: /v1/health
+              port: liveliness-port
+            initialDelaySeconds: 80
+            periodSeconds: 3
+          readinessProbe:
+            tcpSocket:
+              port: 8000
+            initialDelaySeconds: 80
+            periodSeconds: 10
+          env:
+            - name: DB_HOST
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.dbsecret.name }}-{{ .Release.Name}}
+                  key: DB_HOST
+            - name: DB_USER
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.dbsecret.name }}-{{ .Release.Name}}
+                  key: DB_USER
+            - name: DB_PASS
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.dbsecret.name }}-{{ .Release.Name}}
+                  key: DB_PASS
+            - name: DB_PORT
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.dbsecret.name }}-{{ .Release.Name}}
+                  key: DB_PORT
+            - name: DB_NAME
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.dbsecret.name }}-{{ .Release.Name}}
+                  key: DB_NAME
+            - name: BUCKET_NAME
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.dbsecret.name }}-{{ .Release.Name}}
+                  key: BUCKET_NAME
+            - name: AWS_ACCESS_KEY_ID
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.dbsecret.name }}-{{ .Release.Name}}
+                  key: AWS_ACCESS_KEY_ID
+            - name: SECRET_ACCESS_KEY_ID
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.dbsecret.name }}-{{ .Release.Name}}
+                  key: SECRET_ACCESS_KEY_ID
+
+
+
