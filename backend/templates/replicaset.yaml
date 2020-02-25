@@ -25,17 +25,17 @@ spec:
             - name: liveliness-port
               containerPort: 8000
               hostPort: 80
-          livenessProbe:
-            httpGet:
-              path: /v1/health
-              port: liveliness-port
-            initialDelaySeconds: 80
-            periodSeconds: 3
-          readinessProbe:
-            tcpSocket:
-              port: 8000
-            initialDelaySeconds: 80
-            periodSeconds: 10
+#          livenessProbe:
+#            httpGet:
+#              path: /v1/health
+#              port: liveliness-port
+#            initialDelaySeconds: 80
+#            periodSeconds: 3
+#          readinessProbe:
+#            tcpSocket:
+#              port: 8000
+#            initialDelaySeconds: 80
+#            periodSeconds: 10
           env:
             - name: DB_HOST
               valueFrom:
@@ -77,6 +77,23 @@ spec:
                 secretKeyRef:
                   name: {{ .Values.dbsecret.name }}-{{ .Release.Name}}
                   key: SECRET_ACCESS_KEY_ID
+            - name: redisPass
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.dbsecret.name }}-{{ .Release.Name}}
+                  key: redisPass
+
+      initContainers:
+        - name: init-redis
+          image: {{ .Values.initContainers.name }}
+          command:
+            - 'sh'
+            - '-c'
+            - >
+              until nslookup {{ template "redis.fullname" . }}-redis.default ;
+                do echo waiting for myservice;
+                sleep 2;
+              done;
 
 
 
