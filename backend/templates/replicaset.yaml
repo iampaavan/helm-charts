@@ -82,6 +82,12 @@ spec:
                 secretKeyRef:
                   name: {{ .Values.dbsecret.name }}-{{ .Release.Name}}
                   key: redisPass
+            - name: redisHost
+              value: {{ template "redis.fullname" . }}-redis.default
+
+            - name: redisPort
+              value: {{ .Values.redisport | quote}}
+
 
       initContainers:
         - name: init-redis
