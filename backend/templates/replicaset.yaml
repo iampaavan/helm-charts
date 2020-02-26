@@ -83,7 +83,7 @@ spec:
                   name: {{ .Values.dbsecret.name }}-{{ .Release.Name}}
                   key: redisPass
             - name: redisHost
-              value: {{ template "redis.fullname" . }}-redis.default
+              value: {{ .Release.Name }}-redis.default
 
             - name: redisPort
               value: {{ .Values.redisport | quote}}
@@ -96,7 +96,7 @@ spec:
             - 'sh'
             - '-c'
             - >
-              until nslookup {{ template "redis.fullname" . }}-redis.default ;
+              until nslookup {{ .Release.Name }}-redis.default ;
                 do echo waiting for myservice;
                 sleep 2;
               done;
