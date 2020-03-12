@@ -14,6 +14,9 @@ spec:
     metadata:
       labels:
         {{- include "backend.selectorLabels" . | nindent 8 }}
+      annotations:
+        prometheus.io/scrape: 'true'
+        prometheus.io/port: '8002'
     spec:
       imagePullSecrets:
         - name: {{ .Values.imagePullSecrets }}-{{ .Release.Name }}
@@ -90,21 +93,21 @@ spec:
 
       initContainers:
         - name: init-redis
-          image: redis:latest
+          image: {{ .Values.initContainers.name }}
           command:
-            - 'sh'
-            - '-c'
-            - >
-              until redis-cli -h {{.Release.Name}}-redis.default -p {{ .Values.redisport }} -a {{ .Values.redis.password }} PING;
-                do echo waiting for redis;
-                sleep 2;
-              done;
 #            - 'sh'
 #            - '-c'
 #            - >
-#              until nslookup {{ .Release.Name }}-redis.default ;
-#                do echo waiting for Redis;
+#              until redis-cli -h {{.Release.Name}}-redis.default -p {{ .Values.redisport }} -a {{ .Values.redis.password }} PING;
+#                do echo waiting for redis;
 #                sleep 2;
 #              done;
+            - 'sh'
+            - '-c'
+            - >
+              until nslookup {{ .Release.Name }}-redis.default ;
+                do echo waiting for Redis;
+                sleep 2;
+              done;
 
 
