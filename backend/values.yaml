@@ -5,9 +5,8 @@
 replicaCount: 1
 namespace: api
 image:
-  name: hemalgadhiya/csye-7374-advanced-cloud-webapp-backend:6fb05d3f8256c0a94073a0df88e5ce7b1f3c5060
+  name: hemalgadhiya/csye-7374-advanced-cloud-webapp-backend:466eaaac7855f049e035809c34127b4540a439f0
   pullPolicy: IfNotPresent
-
 imagePullSecrets: dockercreds
 #nameOverride: ""
 #fullnameOverride: ""
@@ -16,9 +15,9 @@ service:
   name: api-backend
   type: LoadBalancer
   port: 80
-
 dbsecret:
   name: django-backend-secret
+
 #PROD RDS URL
 #  rdsurl: postgres-rds-instance.cn7jkyipepdl.us-east-1.rds.amazonaws.com
 # DEV RDS URL
@@ -42,6 +41,5 @@ redis:
   password:
 
 redisport: 6379
-
 initContainers:
   name: busybox:1.28
