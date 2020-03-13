@@ -7,7 +7,6 @@ metadata:
 
 spec:
   replicas: {{ .Values.replicaCount }}
-  # minReadySeconds: {{ .Values.ReadySeconds }}
   strategy:
     rollingUpdate:
       maxSurge: 1
@@ -20,6 +19,9 @@ spec:
     metadata:
       labels:
         {{- include "backend.selectorLabels" . | nindent 8 }}
+      annotations:
+        prometheus.io/scrape: 'true'
+        prometheus.io/port: '8002'
     spec:
       imagePullSecrets:
         - name: {{ .Values.imagePullSecrets }}-{{ .Release.Name }}
@@ -98,7 +100,7 @@ spec:
         - name: init-migrations
           image: {{ .Values.image.name }}
           imagePullPolicy: {{ .Values.image.pullPolicy }}
-          env: 
+          env:
             - name: DB_HOST
               valueFrom:
                 secretKeyRef:
