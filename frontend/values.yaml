@@ -1,0 +1,26 @@
+# Default values for frontend.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+replicaCount: 1
+namespace: ui
+image:
+  name: hemalgadhiya/csye-7374-advanced-cloud-webapp-frontend:84bdd3dc17b7f22b06de39ff7dd8da1b2cb1c7b1
+  pullPolicy: IfNotPresent
+imagePullSecrets: regcred
+#nameOverride: ""
+#fullnameOverride: ""
+service:
+  name: ui-frontend
+#  bname: api-backend-recipe1
+  type: LoadBalancer
+  port: 2000
+  targetport: 2000
+imageCredentials:
+  registry: https://index.docker.io/v1/
+  username:
+  password:
+initContainers:
+  name: busybox:1.28
+
+backendServiceName: ""
