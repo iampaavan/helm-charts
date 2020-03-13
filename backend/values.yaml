@@ -22,24 +22,24 @@ dbsecret:
 #PROD RDS URL
 #  rdsurl: postgres-rds-instance.cn7jkyipepdl.us-east-1.rds.amazonaws.com
 # DEV RDS URL
-  rdsurl: postgres-rds-instance.crhih3bwnzav.us-east-1.rds.amazonaws.com
+  rdsurl:
 
 imageCredentials:
   registry: https://index.docker.io/v1/
-  username: hemalgadhiya
-  password: Hh07101996
+  username:
+  password:
 
-bucketname: dev-hgadhiya-csye7374-image-upload
-awsAccessKey: AKIAUJWRCG77QYGIF35U
-awsSecretKey: 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
+bucketname:
+awsAccessKey:
+awsSecretKey:
 
 #PROD CONFIG
-#bucketname: prod-hgadhiya-csye7374-image-upload
-#awsAccessKey: AKIARWRNIU4HCB3WXS6X
-#awsSecretKey: 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
+#bucketname:
+#awsAccessKey:
+#awsSecretKey:
 
 redis:
-  password: "Admin@123"
+  password:
 
 redisport: 6379
 
