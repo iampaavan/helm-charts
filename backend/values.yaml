@@ -5,7 +5,7 @@
 replicaCount: 1
 namespace: api
 image:
-  name: hemalgadhiya/csye-7374-advanced-cloud-webapp-backend:6510d087b488e6d628fa44a8f2929375522a463e
+  name: hemalgadhiya/csye-7374-advanced-cloud-webapp-backend:ffe0df520a4eb5d6e787fd29de0b3b414642c74f
   pullPolicy: IfNotPresent
 imagePullSecrets: dockercreds
 #nameOverride: ""
@@ -33,7 +33,7 @@ awsSecretKey: aEC2K3HYAbBIOQ0OWbeVB7nixofMGDbKWnI7JApS
 #awsAccessKey: AKIARWRNIU4HCB3WXS6X
 #awsSecretKey: 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
 redis:
-  password: "Admin@123"
+  password: Admin@123
 redisport: 6379
 initContainers:
   name: busybox:1.28
