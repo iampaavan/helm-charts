@@ -33,7 +33,7 @@ awsSecretKey: aEC2K3HYAbBIOQ0OWbeVB7nixofMGDbKWnI7JApS
 #awsAccessKey: AKIARWRNIU4HCB3WXS6X
 #awsSecretKey: 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
 redis:
-  password: Admin@123
+  password: Root@123
 redisport: 6379
 initContainers:
   name: busybox:1.28
