@@ -40,20 +40,6 @@ pipeline
 
  		        }
  	        }
-//  	        stage("helm upgrade")
-//  	        {
-//                 steps
-//                 {
-//                     script
-//                     {
-//                         withKubeConfig([credentialsId: kubecreds,
-//                         serverUrl: "${serverUrl}"])
-//                         {
-//                             sh "kubectl cluster-info"
-//                         }
-//                     }
-//                 }
-//  	        }
  	        stage("install backend")
  	        {
  	            steps
@@ -63,37 +49,42 @@ pipeline
  	                    withKubeConfig([credentialsId: kubecreds,
                         serverUrl: "${serverUrl}"])
                         {
-//                             installBackend(backendReleaseName)
+
                             if(changedFiles.contains("backend"))
                             {
-                                echo "hello"
+                                installBackend(backendReleaseName)
                             }
                             else
                             {
-                                echo "not found"
+                                echo "Nothing to deploy in backend"
                             }
                         }
  	                }
  	            }
  	        }
-//  	        stage("install frontend")
-//  	        {
-//  	            steps
-//  	            {
-//  	                script
-//  	                {
-//  	                    withKubeConfig([credentialsId: kubecreds,
-//                         serverUrl: "${serverUrl}"])
-//                         {
-//                             installfrontend(frontendReleaseName)
-//
-//                         }
-//  	                }
-//  	            }
-//  	        }
+ 	        stage("install frontend")
+ 	        {
+ 	            steps
+ 	            {
+ 	                script
+ 	                {
+ 	                    withKubeConfig([credentialsId: kubecreds,
+                        serverUrl: "${serverUrl}"])
+                        {
+                            if(changedFiles.contains("frontend")
+                            {
+                                installfrontend(frontendReleaseName)
+                            }
+                            else
+                            {
+                                echo "Nothing to deploy in frontend"
+                            }
+                        }
+ 	                }
+ 	            }
+ 	        }
 
       }
-
 }
 def installBackend(backendReleaseName){
     script
