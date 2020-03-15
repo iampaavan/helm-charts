@@ -30,9 +30,13 @@ pipeline
  			    steps
  		        {
  		            checkout scm
- 		            sh 'git diff --name-only --diff-filter=ADMR @~..@ > output.txt'
-                    def changedFiles = readFile 'output.txt'
-                    echo "Changed files - ${changedFiles}"
+ 		            script
+ 		            {
+ 		                sh ('git diff --name-only --diff-filter=ADMR @~..@ > output.txt')
+                        def changedFiles = readFile 'output.txt'
+                        echo "Changed files - ${changedFiles}"
+ 		            }
+
  		        }
  	        }
 //  	        stage("helm upgrade")
