@@ -38,7 +38,7 @@ pipeline
                     {
                         sh ("pwd")
                         sh ("ls")
-                        withKubeConfig([credentialsId: kubeconfig)
+                        withKubeConfig([credentialsId: kubeconfig])
                         {
                             sh "kubectl cluster-info dump"
                         }
