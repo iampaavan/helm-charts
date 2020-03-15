@@ -53,21 +53,24 @@ pipeline
 //                     }
 //                 }
 //  	        }
-//  	        stage("install backend")
-//  	        {
-//  	            steps
-//  	            {
-//  	                script
-//  	                {
-//  	                    withKubeConfig([credentialsId: kubecreds,
-//                         serverUrl: "${serverUrl}"])
-//                         {
-// //                             installBackend(backendReleaseName)
-//                             echo "hello"
-//                         }
-//  	                }
-//  	            }
-//  	        }
+ 	        stage("install backend")
+ 	        {
+ 	            steps
+ 	            {
+ 	                script
+ 	                {
+ 	                    withKubeConfig([credentialsId: kubecreds,
+                        serverUrl: "${serverUrl}"])
+                        {
+//                             installBackend(backendReleaseName)
+                            if(changedFiles.contains("backend")
+                            {
+                                echo "hello"
+                            }
+                        }
+ 	                }
+ 	            }
+ 	        }
 //  	        stage("install frontend")
 //  	        {
 //  	            steps
