@@ -145,4 +145,3 @@ spec:
                 do echo waiting for Redis;
                 sleep 2;
               done;
-
