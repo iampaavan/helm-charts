@@ -40,7 +40,7 @@ pipeline
                         sh ("ls")
                         withKubeConfig([credentialsId: kubeconfig])
                         {
-                            sh "kubectl get nodes"
+                            sh "kubectl cluster-info dump"
                         }
                     }
                 }
