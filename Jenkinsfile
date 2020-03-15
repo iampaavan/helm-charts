@@ -64,7 +64,7 @@ pipeline
                         serverUrl: "${serverUrl}"])
                         {
 //                             installBackend(backendReleaseName)
-                            if(changedFiles.contains("Jenkinsfile"))
+                            if(changedFiles.contains("backend"))
                             {
                                 echo "hello"
                             }
