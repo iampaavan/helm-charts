@@ -13,6 +13,7 @@ pipeline
 		    serverUrl = credentials("serverUrl")
 			registryCredential = 'dockerhub'
 			githubCredential = 'github'
+			kubeconfig = 'kubernetes_config'
 			dockerImage = ''
 			GIT_COMMIT = """${sh(
                 returnStdout: true,
@@ -37,7 +38,7 @@ pipeline
                     {
                         sh ("pwd")
                         sh ("ls")
-                        withKubeConfig([credentialsId: kubernetes_config,
+                        withKubeConfig([credentialsId: kubeconfig,
                         serverUrl: "${serverUrl}"])
                         {
                             sh "kubectl cluster-info"
