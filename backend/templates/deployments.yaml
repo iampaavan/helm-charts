@@ -1,12 +1,17 @@
 apiVersion: apps/v1
-kind: ReplicaSet
+kind: Deployment
+
 metadata:
   name: {{ include "backend.fullname" . }}
-  labels:
-    {{- include "backend.labels" . | nindent 4 }}
   namespace: {{ .Values.namespace }}
+
 spec:
   replicas: {{ .Values.replicaCount }}
+  strategy:
+    rollingUpdate:
+      maxSurge: 1
+      maxUnavailable: 0
+    type: RollingUpdate
   selector:
     matchLabels:
       {{- include "backend.selectorLabels" . | nindent 6 }}
@@ -92,6 +97,37 @@ spec:
               value: {{ .Values.redisport | quote}}
 
       initContainers:
+        - name: init-migrations
+          image: {{ .Values.image.name }}
+          imagePullPolicy: {{ .Values.image.pullPolicy }}
+          env:
+            - name: DB_HOST
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.dbsecret.name }}-{{ .Release.Name}}
+                  key: DB_HOST
+            - name: DB_USER
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.dbsecret.name }}-{{ .Release.Name}}
+                  key: DB_USER
+            - name: DB_PASS
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.dbsecret.name }}-{{ .Release.Name}}
+                  key: DB_PASS
+            - name: DB_PORT
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.dbsecret.name }}-{{ .Release.Name}}
+                  key: DB_PORT
+            - name: DB_NAME
+              valueFrom:
+                secretKeyRef:
+                  name: {{ .Values.dbsecret.name }}-{{ .Release.Name}}
+                  key: DB_NAME
+          command: ['sh', '-c', 'python ./recipe_management/manage.py migrate && sleep 2']
+
         - name: init-redis
           image: {{ .Values.initContainers.name }}
           command:
@@ -109,5 +145,3 @@ spec:
                 do echo waiting for Redis;
                 sleep 2;
               done;
-
-
