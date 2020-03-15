@@ -110,3 +110,4 @@ def createNameSpace(name)
         sh ("kubectl create namespace ${name} --dry-run -o yaml | kubectl apply -f -")
     }
 }
+
