@@ -1,3 +1,4 @@
+def changedFiles
 pipeline
 	{
 	  environment
@@ -33,7 +34,7 @@ pipeline
  		            script
  		            {
  		                sh ('git diff --name-only --diff-filter=ADMR @~..@ > output.txt')
-                        def changedFiles = readFile 'output.txt'
+                        changedFiles = readFile 'output.txt'
                         echo "Changed files - ${changedFiles}"
  		            }
 
