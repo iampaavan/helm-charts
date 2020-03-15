@@ -90,7 +90,7 @@ def installBackend(backendReleaseName){
 def installfrontend(frontendReleaseName){
     script
     {
-        def backendSvcName = sh (returnStdout: true, script: "kubectl get service -n api| grep api-backend | awk '{print $1}'| tr -d '\n'")
+        def backendSvcName = sh (returnStdout: true, script: "kubectl get service -n api| grep api-backend | awk '{print \$1}'| tr -d '\n'")
 //         sh ("helm upgrade --install ")
         return backendSvcName
     }
