@@ -71,7 +71,7 @@ pipeline
  	                    withKubeConfig([credentialsId: kubecreds,
                         serverUrl: "${serverUrl}"])
                         {
-                            if(changedFiles.contains("frontend")
+                            if(changedFiles.contains("frontend"))
                             {
                                 installfrontend(frontendReleaseName)
                             }

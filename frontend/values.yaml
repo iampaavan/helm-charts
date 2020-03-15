@@ -23,4 +23,3 @@ imageCredentials:
 initContainers:
   name: busybox:1.28
 backendServiceName: ""
-
