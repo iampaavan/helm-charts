@@ -30,52 +30,55 @@ pipeline
  			    steps
  		        {
  		            checkout scm
+ 		            sh 'git diff --name-only --diff-filter=ADMR @~..@ > output.txt'
+                    changedFiles = readFile 'output.txt'
+                    echo "Changed files - ${changedFiles}"
  		        }
  	        }
- 	        stage("helm upgrade")
- 	        {
-                steps
-                {
-                    script
-                    {
-                        withKubeConfig([credentialsId: kubecreds,
-                        serverUrl: "${serverUrl}"])
-                        {
-                            sh "kubectl cluster-info"
-                        }
-                    }
-                }
- 	        }
- 	        stage("install backend")
- 	        {
- 	            steps
- 	            {
- 	                script
- 	                {
- 	                    withKubeConfig([credentialsId: kubecreds,
-                        serverUrl: "${serverUrl}"])
-                        {
-//                             installBackend(backendReleaseName)
-                            echo "hello"
-                        }
- 	                }
- 	            }
- 	        }
- 	        stage("install frontend")
- 	        {
- 	            steps
- 	            {
- 	                script
- 	                {
- 	                    withKubeConfig([credentialsId: kubecreds,
-                        serverUrl: "${serverUrl}"])
-                        {
-                            installfrontend(frontendReleaseName)
-
-                        }
- 	                }
- 	            }
- 	        }
+//  	        stage("helm upgrade")
+//  	        {
+//                 steps
+//                 {
+//                     script
+//                     {
+//                         withKubeConfig([credentialsId: kubecreds,
+//                         serverUrl: "${serverUrl}"])
+//                         {
+//                             sh "kubectl cluster-info"
+//                         }
+//                     }
+//                 }
+//  	        }
+//  	        stage("install backend")
+//  	        {
+//  	            steps
+//  	            {
+//  	                script
+//  	                {
+//  	                    withKubeConfig([credentialsId: kubecreds,
+//                         serverUrl: "${serverUrl}"])
+//                         {
+// //                             installBackend(backendReleaseName)
+//                             echo "hello"
+//                         }
+//  	                }
+//  	            }
+//  	        }
+//  	        stage("install frontend")
+//  	        {
+//  	            steps
+//  	            {
+//  	                script
+//  	                {
+//  	                    withKubeConfig([credentialsId: kubecreds,
+//                         serverUrl: "${serverUrl}"])
+//                         {
+//                             installfrontend(frontendReleaseName)
+//
+//                         }
+//  	                }
+//  	            }
+//  	        }
 
       }
 
