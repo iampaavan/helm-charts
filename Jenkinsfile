@@ -99,7 +99,7 @@ def installfrontend(frontendReleaseName){
     {
         createNameSpace('ui')
         backendSvcName = sh (returnStdout: true, script: "kubectl get service -n api| grep api-backend | awk '{print \$1}'| tr -d '\n'")
-        sh ("helm upgrade --install ${frontendReleaseName} ./frontend/ --set backendServiceName=${backendSvcName} --set imageCredentials.username=${docker_username} --set imageCredentials.password=${docker_password}")
+        sh ("helm upgrade --install ${frontendReleaseName} ./frontend/ --set backendServiceName=${backendSvcName} --set imageCredentials.username=${docker_username} --set imageCredentials.password=${docker_password} --set replicaCount=2")
     }
 }
 
