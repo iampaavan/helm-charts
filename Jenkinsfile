@@ -63,7 +63,7 @@ pipeline
                         serverUrl: "${serverUrl}"])
                         {
 //                             installBackend(backendReleaseName)
-                            if(changedFiles.contains("backend")
+                            if(changedFiles.contains("backend"))
                             {
                                 echo "hello"
                             }
