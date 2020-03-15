@@ -55,7 +55,6 @@ pipeline
  	                    withKubeConfig([credentialsId: kubecreds,
                         serverUrl: "${serverUrl}"])
                         {
-//                             sh (" kubectl create ns api")
                             installBackend(backendReleaseName)
                         }
  	                }
@@ -70,3 +69,11 @@ def installBackend(backendReleaseName){
         sh ("helm upgrade --install ${backendReleaseName} ./backend --set imageCredentials.username=${docker_username} --set imageCredentials.password=${docker_password} --set bucketname=${s3_bucket} --set awsAccessKey=${access_key} --set awsSecretKey=${secret_key} --set redis.password=${redis_password} --set dbsecret.rdsurl=${rds_url} --set replicaCount=2")
     }
 }
+
+// def installfrontend(frontendReleaseName){
+//     script
+//     {
+//         def backendSvcName = sh (returnStdout: true, script: "kubectl get service -n api| grep api-backend | awk '{print $1}'| tr -d '\n'")
+//         sh ("helm upgrade --install ")
+//     }
+// }
