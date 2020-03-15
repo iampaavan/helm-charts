@@ -38,8 +38,7 @@ pipeline
                     {
                         sh ("pwd")
                         sh ("ls")
-                        withKubeConfig([credentialsId: kubeconfig,
-                        serverUrl: "${serverUrl}"])
+                        withKubeConfig([credentialsId: kubeconfig)
                         {
                             sh "kubectl cluster-info dump"
                         }
