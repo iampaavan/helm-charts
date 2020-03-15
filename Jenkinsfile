@@ -39,9 +39,9 @@ pipeline
                         sh ("pwd")
                         sh ("ls")
                         withKubeConfig([credentialsId: kubecreds,
-                        serverUrl: 'https://api-k8s-dev-hgadhiya-me-uf9iq7-501824522.us-east-1.elb.amazonaws.com'])
+                        serverUrl: "${serverUrl}"])
                         {
-                            sh "kubectl cluster-info dump"
+                            sh "kubectl cluster-info"
                         }
                     }
                 }
