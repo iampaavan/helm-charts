@@ -31,7 +31,7 @@ pipeline
  		        {
  		            checkout scm
  		            sh 'git diff --name-only --diff-filter=ADMR @~..@ > output.txt'
-                    changedFiles = readFile 'output.txt'
+                    def changedFiles = readFile 'output.txt'
                     echo "Changed files - ${changedFiles}"
  		        }
  	        }
