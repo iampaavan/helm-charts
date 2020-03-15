@@ -54,7 +54,7 @@ pipeline
  	                    withKubeConfig([credentialsId: kubecreds,
                         serverUrl: "${serverUrl}"])
                         {
-                            sh (" kubectl create ns api")
+//                             sh (" kubectl create ns api")
                             sh ("helm install release ./backend --set imageCredentials.username=hemalgadhiya --set imageCredentials.password=Hh07101996 --set bucketname=dev-hgadhiya-csye7374-image-upload --set awsAccessKey=AKIAUJWRCG77QYGIF35U --set awsSecretKey=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 --set redis.password=Admin@123 --set dbsecret.rdsurl=postgres-rds-instance.crhih3bwnzav.us-east-1.rds.amazonaws.com --set replicaCount=2")
                         }
  	                }
