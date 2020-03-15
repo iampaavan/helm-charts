@@ -15,6 +15,7 @@ pipeline
 			githubCredential = 'github'
 			kubecreds = 'kubecreds'
 			dockerImage = ''
+			backendReleaseName = "backend"
 			GIT_COMMIT = """${sh(
                 returnStdout: true,
                 script: 'git rev-parse HEAD'
@@ -55,11 +56,17 @@ pipeline
                         serverUrl: "${serverUrl}"])
                         {
 //                             sh (" kubectl create ns api")
-                            sh ("helm install release ./backend --set imageCredentials.username=hemalgadhiya --set imageCredentials.password=Hh07101996 --set bucketname=dev-hgadhiya-csye7374-image-upload --set awsAccessKey=AKIAUJWRCG77QYGIF35U --set awsSecretKey=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 --set redis.password=Admin@123 --set dbsecret.rdsurl=postgres-rds-instance.crhih3bwnzav.us-east-1.rds.amazonaws.com --set replicaCount=2")
+                            installBackend(backendReleaseName)
                         }
  	                }
  	            }
  	        }
       }
 
+}
+def installBackend(backendReleaseName){
+    script
+    {
+        sh ("helm upgrade --install ${backendReleaseName} ./backend --set imageCredentials.username=${docker_username} --set imageCredentials.password=${docker_password} --set bucketname=${s3_bucket} --set awsAccessKey=${access_key} --set awsSecretKey=${secret_key} --set redis.password=${redis_password} --set dbsecret.rdsurl=${rds_url} --set replicaCount=2")
+    }
 }
