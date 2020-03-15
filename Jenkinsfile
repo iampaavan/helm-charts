@@ -16,6 +16,7 @@ pipeline
 			kubecreds = 'kubecreds'
 			dockerImage = ''
 			backendReleaseName = "backend"
+			frontendReleaseName= "frontend"
 			GIT_COMMIT = """${sh(
                 returnStdout: true,
                 script: 'git rev-parse HEAD'
@@ -41,7 +42,6 @@ pipeline
                         serverUrl: "${serverUrl}"])
                         {
                             sh "kubectl cluster-info"
-                            sh "helm init"
                         }
                     }
                 }
@@ -55,11 +55,28 @@ pipeline
  	                    withKubeConfig([credentialsId: kubecreds,
                         serverUrl: "${serverUrl}"])
                         {
-                            installBackend(backendReleaseName)
+//                             installBackend(backendReleaseName)
+                            echo "hello"
                         }
  	                }
  	            }
  	        }
+ 	        stage("install frontend")
+ 	        {
+ 	            steps
+ 	            {
+ 	                script
+ 	                {
+ 	                    withKubeConfig([credentialsId: kubecreds,
+                        serverUrl: "${serverUrl}"])
+                        {
+                            def svc = installfrontend(frontendReleaseName)
+                            echo svc
+                        }
+ 	                }
+ 	            }
+ 	        }
+
       }
 
 }
@@ -70,10 +87,11 @@ def installBackend(backendReleaseName){
     }
 }
 
-// def installfrontend(frontendReleaseName){
-//     script
-//     {
-//         def backendSvcName = sh (returnStdout: true, script: "kubectl get service -n api| grep api-backend | awk '{print $1}'| tr -d '\n'")
+def installfrontend(frontendReleaseName){
+    script
+    {
+        def backendSvcName = sh (returnStdout: true, script: "kubectl get service -n api| grep api-backend | awk '{print $1}'| tr -d '\n'")
 //         sh ("helm upgrade --install ")
-//     }
-// }
+        return backendSvcName
+    }
+}
