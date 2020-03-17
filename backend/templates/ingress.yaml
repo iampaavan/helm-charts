@@ -1,0 +1,26 @@
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: ingress-{{ .Release.Name }}
+  namespace: {{ .Values.namespace }}
+  annotations:
+    nginx.ingress.kubernetes.io/use-regex: "true"
+    kubernetes.io/tls-acme: "true"
+spec:
+  tls:
+  - hosts:
+    - hgadhiya.me
+    secretName: tls-secret
+  rules:
+  - host: {{ .Values.ingress.host }}
+    http:
+      paths:
+      - path: /v1/health
+        backend:
+          serviceName: {{ .Values.service.name }}-{{ .Release.Name }}
+          servicePort: 80
+      - path: /ui
+          backend:
+            serviceName: ui-frontend-frontend.ui
+            servicePort: 2000
+

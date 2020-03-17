@@ -22,4 +22,7 @@ imageCredentials:
   password:
 initContainers:
   name: busybox:1.28
+
 backendServiceName: ""
+ingress:
+  host: hgadhiya.me
