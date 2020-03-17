@@ -5,14 +5,14 @@
 replicaCount: 2
 namespace: ui
 image:
-  name: iampaavan/csye-7374-advanced-cloud-webapp-frontend:216ed3eae99620d320afe9159db7eff995281d16
+  name: iampaavan/csye-7374-advanced-cloud-webapp-frontend:c5b3cc1220b02a65cf7eb9828cf076bc37d5a219
   pullPolicy: IfNotPresent
 imagePullSecrets: regcred
 #nameOverride: ""
 #fullnameOverride: ""
 service:
   name: ui-frontend
-#  bname: api-backend-recipe1
+  #  bname: api-backend-recipe1
   type: LoadBalancer
   port: 2000
   targetport: 2000
@@ -22,5 +22,4 @@ imageCredentials:
   password: viratKohli153@
 initContainers:
   name: busybox:1.28
-
 backendServiceName: ""
