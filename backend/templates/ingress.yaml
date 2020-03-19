@@ -4,12 +4,13 @@ metadata:
   name: ingress-{{ .Release.Name }}
   namespace: {{ .Values.namespace }}
   annotations:
-    nginx.ingress.kubernetes.io/use-regex: "true"
+    kubernetes.io/ingress.class: nginx
     kubernetes.io/tls-acme: "true"
+    nginx.ingress.kubernetes.io/use-regex: "true"
 spec:
   tls:
   - hosts:
-    - hgadhiya.me
+    - {{ .Values.ingress.host }}
     secretName: tls-secret
   rules:
   - host: {{ .Values.ingress.host }}
@@ -19,8 +20,40 @@ spec:
         backend:
           serviceName: {{ .Values.service.name }}-{{ .Release.Name }}
           servicePort: 80
-      - path: /ui
-          backend:
-            serviceName: ui-frontend-frontend.ui
-            servicePort: 2000
+      - path: /v1/user
+        backend:
+          serviceName: {{ .Values.service.name }}-{{ .Release.Name }}
+          servicePort: 80
+      - path: /v1/user/self
+        backend:
+          serviceName: {{ .Values.service.name }}-{{ .Release.Name }}
+          servicePort: 80
+      - path: /v1/recipe/
+        backend:
+          serviceName: {{ .Values.service.name }}-{{ .Release.Name }}
+          servicePort: 80
+      - path: /v1/recipes
+        backend:
+          serviceName: {{ .Values.service.name }}-{{ .Release.Name }}
+          servicePort: 80
+      - path: /v1/get/random/recipe
+        backend:
+          serviceName: {{ .Values.service.name }}-{{ .Release.Name }}
+          servicePort: 80
+      - path: /v1/redishealth
+        backend:
+          serviceName: {{ .Values.service.name }}-{{ .Release.Name }}
+          servicePort: 80
+      - path: /v1/get/random/recipe
+        backend:
+          serviceName: {{ .Values.service.name }}-{{ .Release.Name }}
+          servicePort: 80
+      - path: /v1/*
+        backend:
+          serviceName: {{ .Values.service.name }}-{{ .Release.Name }}
+          servicePort: 80
+      - path: /v1/(.*)
+        backend:
+          serviceName: {{ .Values.service.name }}-{{ .Release.Name }}
+          servicePort: 80
 

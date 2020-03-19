@@ -25,4 +25,4 @@ initContainers:
 
 backendServiceName: ""
 ingress:
-  host: hgadhiya.me
+  host: dev.hgadhiya.me
