@@ -55,3 +55,4 @@ spec:
               do echo waiting for myservice;
               sleep 2;
             done;
+

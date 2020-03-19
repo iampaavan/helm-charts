@@ -57,3 +57,4 @@ spec:
           serviceName: {{ .Values.service.name }}-{{ .Release.Name }}
           servicePort: 80
 
+
