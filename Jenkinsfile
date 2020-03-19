@@ -90,7 +90,11 @@ def installBackend(backendReleaseName){
     script
     {
         createNameSpace('api')
+<<<<<<< HEAD
         sh ("helm upgrade --install ${backendReleaseName} ./backend --set imageCredentials.username=${docker_username} --set imageCredentials.password=${docker_password} --set bucketname=${s3_bucket} --set awsAccessKey=${access_key} --set awsSecretKey=${secret_key} --set redis.password=${redis_password} --set dbsecret.rdsurl=${rds_url} --set replicaCount=2")
+=======
+        sh ("helm upgrade --install ${backendReleaseName} ./backend --set imageCredentials.username=${docker_username} --set imageCredentials.password=${docker_password} --set bucketname=${s3_bucket} --set awsAccessKey=${access_key} --set awsSecretKey=${secret_key} --set redis.password=${redis_password} --set dbsecret.rdsurl=${rds_url} --set replicaCount=1")
+>>>>>>> a3cda2719b792d86c6de9640810a3a48db66ce60
     }
 }
 
@@ -99,7 +103,11 @@ def installfrontend(frontendReleaseName){
     {
         createNameSpace('ui')
         backendSvcName = sh (returnStdout: true, script: "kubectl get service -n api| grep api-backend | awk '{print \$1}'| tr -d '\n'")
+<<<<<<< HEAD
         sh ("helm upgrade --install ${frontendReleaseName} ./frontend/ --set backendServiceName=${backendSvcName} --set imageCredentials.username=${docker_username} --set imageCredentials.password=${docker_password} --set replicaCount=2")
+=======
+        sh ("helm upgrade --install ${frontendReleaseName} ./frontend/ --set backendServiceName=${backendSvcName} --set imageCredentials.username=${docker_username} --set imageCredentials.password=${docker_password} --set replicaCount=1")
+>>>>>>> a3cda2719b792d86c6de9640810a3a48db66ce60
     }
 }
 
@@ -110,3 +118,7 @@ def createNameSpace(name)
         sh ("kubectl create namespace ${name} --dry-run -o yaml | kubectl apply -f -")
     }
 }
+<<<<<<< HEAD
+=======
+
+>>>>>>> a3cda2719b792d86c6de9640810a3a48db66ce60

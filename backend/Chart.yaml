@@ -2,7 +2,11 @@ apiVersion: v2
 name: backend
 description: A Helm chart for Kubernetes
 type: application
+<<<<<<< HEAD
 version: 0.1.6
+=======
+version: 2.0.20
+>>>>>>> a3cda2719b792d86c6de9640810a3a48db66ce60
 appVersion: 1.16.0
 sources:
 - https://github.com/CSYE-7374-Advanced-Cloud-Computing/helm-charts.git
@@ -10,4 +14,8 @@ maintainers:
 - name: Hemal Gadhiya
   email: gadhiya.h@husky.neu.edu
 - name: Paavan Gopala
+<<<<<<< HEAD
   email: gopalareddy.p@husky.neu.edu
+=======
+  email: gopala.p@husky.neu.edu
+>>>>>>> a3cda2719b792d86c6de9640810a3a48db66ce60

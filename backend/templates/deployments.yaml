@@ -25,6 +25,7 @@ spec:
     spec:
       imagePullSecrets:
         - name: {{ .Values.imagePullSecrets }}-{{ .Release.Name }}
+      serviceAccountName: serviceaccount-{{ .Release.Name }}
       containers:
         - name: {{ .Chart.Name }}
           image: {{ .Values.image.name }}
@@ -145,4 +146,3 @@ spec:
                 do echo waiting for Redis;
                 sleep 2;
               done;
-
