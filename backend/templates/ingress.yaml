@@ -16,38 +16,6 @@ spec:
   - host: {{ .Values.ingress.host }}
     http:
       paths:
-      - path: /v1/health
-        backend:
-          serviceName: {{ .Values.service.name }}-{{ .Release.Name }}
-          servicePort: 80
-      - path: /v1/user
-        backend:
-          serviceName: {{ .Values.service.name }}-{{ .Release.Name }}
-          servicePort: 80
-      - path: /v1/user/self
-        backend:
-          serviceName: {{ .Values.service.name }}-{{ .Release.Name }}
-          servicePort: 80
-      - path: /v1/recipe/
-        backend:
-          serviceName: {{ .Values.service.name }}-{{ .Release.Name }}
-          servicePort: 80
-      - path: /v1/recipes
-        backend:
-          serviceName: {{ .Values.service.name }}-{{ .Release.Name }}
-          servicePort: 80
-      - path: /v1/get/random/recipe
-        backend:
-          serviceName: {{ .Values.service.name }}-{{ .Release.Name }}
-          servicePort: 80
-      - path: /v1/redishealth
-        backend:
-          serviceName: {{ .Values.service.name }}-{{ .Release.Name }}
-          servicePort: 80
-      - path: /v1/get/random/recipe
-        backend:
-          serviceName: {{ .Values.service.name }}-{{ .Release.Name }}
-          servicePort: 80
       - path: /v1/*
         backend:
           serviceName: {{ .Values.service.name }}-{{ .Release.Name }}
