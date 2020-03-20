@@ -56,5 +56,3 @@ spec:
         backend:
           serviceName: {{ .Values.service.name }}-{{ .Release.Name }}
           servicePort: 80
-
-
