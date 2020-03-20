@@ -5,7 +5,7 @@
 replicaCount: 2
 namespace: api
 image:
-  name: iampaavan/csye-7374-advanced-cloud-webapp-backend:f746e034d5c75099f3de572822990737dfb8ec19
+  name: iampaavan/csye-7374-advanced-cloud-webapp-backend:8b6430e1a068012b3bfbfb0f0b9955ad072cc885
   pullPolicy: IfNotPresent
 imagePullSecrets: dockercreds
 #nameOverride: ""
@@ -37,6 +37,5 @@ redis:
 redisport: 6379
 initContainers:
   name: busybox:1.28
-
 ingress:
   host: dev.paavangopala.me
