@@ -5,7 +5,7 @@
 replicaCount: 2
 namespace: ui
 image:
-  name: iampaavan/csye-7374-advanced-cloud-webapp-frontend:c5b3cc1220b02a65cf7eb9828cf076bc37d5a219
+  name: iampaavan/csye-7374-advanced-cloud-webapp-frontend:9e8e9af629bc3cfda0d65e1b99aa1993eeb3d1e3
   pullPolicy: IfNotPresent
 imagePullSecrets: regcred
 #nameOverride: ""
