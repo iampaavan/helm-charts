@@ -24,4 +24,4 @@ initContainers:
   name: busybox:1.28
 backendServiceName: ""
 ingress:
-  host: dev.hgadhiya.me
+  host: dev.paavangopala.me
