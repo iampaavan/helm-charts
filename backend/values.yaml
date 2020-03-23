@@ -39,4 +39,4 @@ initContainers:
   name: busybox:1.28
 
 ingress:
-  host: dev.hgadhiya.me
+  host: hgadhiya.me
