@@ -2,7 +2,7 @@ apiVersion: v2
 name: backend
 description: A Helm chart for Kubernetes
 type: application
-version: 2.0.21
+version: 2.0.22
 appVersion: 1.16.0
 sources:
 - https://github.com/CSYE-7374-Advanced-Cloud-Computing/helm-charts.git
