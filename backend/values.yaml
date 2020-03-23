@@ -5,7 +5,7 @@
 replicaCount: 2
 namespace: api
 image:
-  name: hemalgadhiya/csye-7374-advanced-cloud-webapp-backend:d3bf227e881ba42f7f5836151f2b968146131571
+  name: hemalgadhiya/csye-7374-advanced-cloud-webapp-backend:65fe2a5a63f5a6d0fd3b9d689e055ab388b007ba
   pullPolicy: IfNotPresent
 imagePullSecrets: dockercreds
 #nameOverride: ""
@@ -37,6 +37,5 @@ redis:
 redisport: 6379
 initContainers:
   name: busybox:1.28
-
 ingress:
   host: hgadhiya.me
