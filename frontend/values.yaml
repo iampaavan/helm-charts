@@ -5,7 +5,7 @@
 replicaCount: 1
 namespace: ui
 image:
-  name: hemalgadhiya/csye-7374-advanced-cloud-webapp-frontend:5bcf9030360730ae43ad9515cfaa63937f213a11
+  name: hemalgadhiya/csye-7374-advanced-cloud-webapp-frontend:eb22604c6ee0a60c5866a083290518d0054c961b
   pullPolicy: IfNotPresent
 imagePullSecrets: regcred
 #nameOverride: ""
