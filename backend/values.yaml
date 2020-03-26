@@ -5,7 +5,7 @@
 replicaCount: 1
 namespace: api
 image:
-  name: iampaavan/csye-7374-advanced-cloud-webapp-backend:30d73126159cea5f01ede310fef77ac56eb33102
+  name: iampaavan/csye-7374-advanced-cloud-webapp-backend:93f06fe5794e6136994c6874762eb7c1a749a23f
   pullPolicy: IfNotPresent
 imagePullSecrets: dockercreds
 #nameOverride: ""
