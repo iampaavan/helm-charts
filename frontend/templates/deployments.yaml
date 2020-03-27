@@ -44,6 +44,13 @@ spec:
               port: 2000
             initialDelaySeconds: 80
             periodSeconds: 10
+          resources:
+            limits:
+              memory: "100Mi"
+              cpu: "100m"
+            requests:
+              memory: "50Mi"
+              cpu: "50m"
       initContainers:
         - name: init-backend
           image: {{ .Values.initContainers.name }}
