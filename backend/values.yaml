@@ -20,14 +20,14 @@ dbsecret:
   #PROD RDS URL
   #  rdsurl: postgres-rds-instance.cn7jkyipepdl.us-east-1.rds.amazonaws.com
   # DEV RDS URL
-  rdsurl:
+  rdsurl: ""
 imageCredentials:
   registry: https://index.docker.io/v1/
   username:
   password:
-bucketname:
-awsAccessKey:
-awsSecretKey:
+bucketname: ""
+awsAccessKey: ""
+awsSecretKey: ""
 #PROD CONFIG
 #bucketname:
 #awsAccessKey:
