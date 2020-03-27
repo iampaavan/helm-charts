@@ -109,8 +109,4 @@ def createNameSpace(name)
     {
         sh ("kubectl create namespace ${name} --dry-run -o yaml | kubectl apply -f -")
     }
-<<<<<<< HEAD
 }
-=======
-}
->>>>>>> c6dfa6c6dd87412c23a40fa3379d3a5cdcd65c1d
