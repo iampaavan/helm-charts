@@ -1,10 +1,8 @@
 apiVersion: apps/v1
 kind: Deployment
-
 metadata:
   name: {{ include "backend.fullname" . }}
   namespace: {{ .Values.namespace }}
-
 spec:
   replicas: {{ .Values.replicaCount }}
   strategy:
@@ -25,6 +23,7 @@ spec:
     spec:
       imagePullSecrets:
         - name: {{ .Values.imagePullSecrets }}-{{ .Release.Name }}
+      serviceAccountName: serviceaccount-{{ .Release.Name }}
       containers:
         - name: {{ .Chart.Name }}
           image: {{ .Values.image.name }}
@@ -44,6 +43,13 @@ spec:
               port: 8000
             initialDelaySeconds: 80
             periodSeconds: 10
+          resources:
+            limits:
+              memory: "200Mi"
+              cpu: "200m"
+            requests:
+              memory: "100Mi"
+              cpu: "100m"
           env:
             - name: DB_HOST
               valueFrom:
@@ -145,4 +151,3 @@ spec:
                 do echo waiting for Redis;
                 sleep 2;
               done;
-

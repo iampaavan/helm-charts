@@ -18,8 +18,10 @@ service:
   targetport: 2000
 imageCredentials:
   registry: https://index.docker.io/v1/
-  username: iampaavan
-  password: viratKohli153@
+  username:
+  password:
 initContainers:
   name: busybox:1.28
 backendServiceName: ""
+ingress:
+  host: dev.paavangopala.me
