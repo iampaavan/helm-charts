@@ -38,4 +38,4 @@ redisport: 6379
 initContainers:
   name: busybox:1.28
 ingress:
-  host: dev.paavangopala.me
+  host: paavangopala.me
